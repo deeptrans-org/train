@@ -37,7 +37,7 @@ parser.add_argument('--vocab_size',
     help='Vocabulary size. Default: %(default)s')
 parser.add_argument('--corpus_size',
     type=int,
-    default=200000000,
+    default=160000000,
     help='Corpus size. Default: %(default)s')
 parser.add_argument('--reverse',
     action='store_true',
@@ -150,7 +150,7 @@ _date_code = datetime.today().strftime('%y%m')
 _corpus_size = round(os.path.getsize(data['train']['path_src']) / (1024 ** 3))
 
 _vocab_size = round(vocab_size / 1000)
-_corpus_size = round(corpus_size / 1000000)
+# _corpus_size = round(corpus_size / 1000000)
 _tokenizer = ".bpe" if use_bpe else ""
 
 version = f"{_date_code}.{_vocab_size}.{_corpus_size}{_tokenizer}"
@@ -174,7 +174,7 @@ if not os.path.isfile(sp_model_path):
             model_prefix=f"{run_dir}/{sp_name}", 
             vocab_size=vocab_size,
             character_coverage=character_coverage,
-            input_sentence_size=min(corpus_size, 160000000),
+            input_sentence_size=corpus_size,
             train_extremely_large_corpus=True,
             max_sentence_length=8192,
             num_threads=num_threads,
