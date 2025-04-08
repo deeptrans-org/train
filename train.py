@@ -37,7 +37,7 @@ parser.add_argument('--vocab_size',
     help='Vocabulary size. Default: %(default)s')
 parser.add_argument('--corpus_size',
     type=int,
-    default=160000000,
+    default=200000000,
     help='Corpus size. Default: %(default)s')
 parser.add_argument('--reverse',
     action='store_true',
