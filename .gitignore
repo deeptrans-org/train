@@ -1,0 +1,15 @@
+corpora
+!corpora\readme.md
+__pycache__
+flores200_dataset
+run
+scripts
+test
+.vscode
+requirements-local.txt
+corpora-test
+*-password.*
+tokenizer/*
+log/*
+shuffle-*.bin
+*.exe
