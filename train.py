@@ -107,14 +107,14 @@ avg_checkpoints = 1
 character_coverage = 1.0
 seq_length = 5000
 
-enc_layers = 4 if test else 6
-dec_layers = 4 if test else 6
-heads = 4 if test else 8
-hidden_size = 368 if test else 512
-word_vec_size = 368 if test else 512
-valid_steps = 200 if test else 5000
-train_steps = 1000 if test else 150000
-save_checkpoint_steps = 100 if test else valid_steps
+enc_layers = 6
+dec_layers = 6
+heads = 8
+hidden_size = 512
+word_vec_size = 512
+valid_steps = 2500
+train_steps = 150000
+save_checkpoint_steps = valid_steps
 keep_checkpoint = 5
 
 transforms = ['sentencepiece', 'filtertoolong']
@@ -222,7 +222,7 @@ onmt_config = {
     'train_steps': train_steps, 
     'early_stopping': 4, 
     'bucket_size': 262144, 
-    'num_worker': 4, # one GPU 4, two GPUs 2. # original 2,
+    'num_worker': 2, # one GPU 4, two GPUs 2. # original 2,
     'world_size': 1, 
     'gpu_ranks': [0], 
     'batch_type': 'tokens', 
