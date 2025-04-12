@@ -4,7 +4,7 @@ import time
 from tqdm import tqdm
 from pymongo import MongoClient, UpdateOne
 
-from languages import languages
+# from languages import languages
 
 client = MongoClient("mongodb://localhost:27017")
 db = client["cp-250227"]
@@ -21,9 +21,9 @@ filename = sys.argv[1]
 code_list = sys.argv[2:]
 
 for code in code_list:
-    if code not in languages:
-        print(f"Error: {code} is not a valid language code")
-        exit()
+    # if code not in languages:
+    #     print(f"Error: {code} is not a valid language code")
+    #     exit()
     if code not in collections:
         print(f"Not found {code} corpus")
         exit()
