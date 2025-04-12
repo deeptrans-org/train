@@ -62,7 +62,7 @@ def export(code):
             {"_id": {"$gt": start_id, "$lte": end_id}},
             {code: 1},
             batch_size=batch_size
-        )
+        ).sort(("_id", 1))
         data = {doc["_id"]: sanitize(doc[code]) if code in doc and doc[code] else "" for doc in list(cursor)}
 
         lines = [data[_id] if _id in data else "" for _id in range(start_id + 1, end_id)]    
