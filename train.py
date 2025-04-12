@@ -101,7 +101,7 @@ else:
 
 current_dir = os.path.dirname(__file__)
 corpora_dir = os.path.join(current_dir, f"{from_code}-{to_code}")
-
+print(f"corpora directory {corpora_dir}")
 if reverse: from_code, to_code = to_code, from_code
 
 avg_checkpoints = 1
