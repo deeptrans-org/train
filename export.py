@@ -1,6 +1,6 @@
 import sys
 import os
-import time
+import re
 from tqdm import tqdm
 from pymongo import MongoClient, UpdateOne
 
@@ -35,6 +35,9 @@ os.makedirs(corpora_dir, exist_ok=True)
 _code_list = " ".join(code_list)
 print(f"Export {_code_list} to: {corpora_dir}")
 
+def sanitize(text):
+    return re.sub(r'[\r\n\t\0]', ' ', text).replace("  ", " ", 1000).strip()
+
 # Export parallel corpus to text files
 def export(code):
     # Clear files before starting
@@ -60,7 +63,7 @@ def export(code):
             {code: 1},
             batch_size=batch_size
         )
-        data = {doc["_id"]: doc[code].strip().replace("\n", " ") if code in doc and doc[code] else "" for doc in list(cursor)}
+        data = {doc["_id"]: sanitize(doc[code]) if code in doc and doc[code] else "" for doc in list(cursor)}
 
         lines = [data[_id] if _id in data else "" for _id in range(start_id + 1, end_id)]    
             
