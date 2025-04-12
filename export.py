@@ -12,12 +12,13 @@ db = client["cp-250227"]
 collections = db.list_collection_names()
 
 if len(sys.argv) < 2:
-    print("Usage: python export.py <code> <code> ...")
+    print("Usage: python export.py <name> <code> <code> ...")
     lang_collections = filter(lambda name: len(name) == 2, collections)
     print(f"Available codes: {' '.join(lang_collections)}")
     exit()
 
-code_list = sys.argv[1:]
+filename = sys.argv[1]
+code_list = sys.argv[2:]
 
 for code in code_list:
     if code not in languages:
@@ -28,8 +29,7 @@ for code in code_list:
         exit()
 
 sep = os.path.sep
-corpora_dir = os.path.abspath(f"..{sep}locomotive{sep}corpora")
-corpora_dir = "E:\\corpus" #os.path.abspath(f"..{sep}locomotive{sep}corpora")
+corpora_dir = "corpora"
 os.makedirs(corpora_dir, exist_ok=True)
 
 _code_list = " ".join(code_list)
@@ -38,7 +38,7 @@ print(f"Export {_code_list} to: {corpora_dir}")
 # Export parallel corpus to text files
 def export(code):
     # Clear files before starting
-    file_path = f"{corpora_dir}{sep}{code}.corpus"
+    file_path = f"{corpora_dir}{sep}{filename}.{code}"
     open(file_path, "w", encoding='utf8').close()
 
     # Get min and max _id
