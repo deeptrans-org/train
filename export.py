@@ -44,7 +44,7 @@ def export(code):
     # Get min and max _id
     max_id = db[code].find_one({}, sort=[("_id", -1)])["_id"]
     total_docs = max_id - 1
-    print(f"Processing {languages[code]['en']} documents from {1:,} to {max_id:,} total {total_docs:,} documents")
+    print(f"Processing {code} documents from {1:,} to {max_id:,} total {total_docs:,} documents")
 
     # Process in larger batches
     batch_size = 1000000  # Increased batch size for better performance
@@ -53,7 +53,7 @@ def export(code):
 
     # print(f"Starting export with {total_batches} batches...")
 
-    for start_id, end_id in tqdm(batch_ranges, desc=f"Exporting {languages[code]['en']} corpus"):
+    for start_id, end_id in tqdm(batch_ranges, desc=f"Exporting {code} corpus"):
 
         cursor = db[code].find(
             {"_id": {"$gt": start_id, "$lte": end_id}},
