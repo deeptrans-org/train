@@ -97,10 +97,12 @@ else:
     
     vocab_size, corpus_size = args.vocab_size, args.corpus_size
 
-if reverse: from_code, to_code = to_code, from_code
+
 
 current_dir = os.path.dirname(__file__)
-corpora_dir = os.path.join(current_dir, "test-corpora" if test else "corpora")
+corpora_dir = os.path.join(current_dir, f"{from_code}-{to_code}")
+
+if reverse: from_code, to_code = to_code, from_code
 
 avg_checkpoints = 1
 
@@ -340,8 +342,7 @@ subprocess.run(
 
 # Create deeptrans package
 package_file = os.path.join(run_dir, f"{model_name}.zip")
-if os.path.isfile(package_file):
-    os.unlink(package_file)
+if os.path.isfile(package_file): os.unlink(package_file)
 print(f"Writing {package_file}")
 
 with zipfile.ZipFile(package_file, 'w') as zipf:
